@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header" />
+
+<body>
+<div id = "wrapper" style="max-width: 95rem; margin: auto;">
+
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+
+    <div class="form-container" style="max-width: 60rem; margin: auto">
+        <form th:action="@{/admin/contents/new}" th:object="${form}" method="post">
+
+            <div class="form-group">
+                <label th:for="contentsNum">항목번호</label>
+                <input type="text" th:field="*{contentsNum}" class="form-control" placeholder="항목번호를 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label th:for="contentsName">항목명</label>
+                <input type="text" th:field="*{contentsName}" class="form-control" placeholder="항목명을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label th:for="contentsPrice">가격</label>
+                <input type="number" th:field="*{contentsPrice}" class="form-control" placeholder="가격을 입력하세요">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+    <br/>
+</div>
+</body>
+</html>

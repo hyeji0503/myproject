@@ -1,0 +1,61 @@
+
+.nav-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 70px;
+}
+
+.nav-brand{
+    padding-bottom: 0px;
+}
+
+.nav-item{
+    padding: 25px;
+}
+
+.nav-item a{
+    text-align: center;
+    color: black;
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.nav-login1{
+    padding-left: 200px;
+    padding-top: 30px;
+}
+
+.nav-login2{
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+.nav-login1 a, .nav-login2 a{
+    text-align: center;
+    font-size:15px;
+    color: grey;
+}
+
+.header {
+    padding-bottom: 17px;
+}
+
+hr{
+    color: #575757;
+    margin-bottom: 2rem;
+}
+
+.btn-primary{
+    background-color: #02a5af;
+    transition: unset;
+    border: 0;
+    outline: 0;
+}
+
+.btn-primary:focus{
+    outline: 0;
+}

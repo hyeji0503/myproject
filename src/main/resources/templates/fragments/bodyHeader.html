@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+<div class="header" th:fragment="bodyHeader">
+
+    <span sec:authentication="name"></span> <-현재 사용자
+    <img src="/image/top.png" style="width: 100%">
+    <nav class="navbar">
+        <ul class="nav-container">
+            <li class="nav-brand"> <a href="/"><img src="/image/brand360.png" style="width: 290px; height: 85px; padding-left: 25px"></a></li>
+            <li class="nav-item"> <a href="#" ><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
+                                                     style="color: black; ">커뮤니티</span></a> </li>
+            <li class="nav-item"> <a href="/items/itemList" ><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
+                                                                  style="color: black; ">제목미정</span></a> </li>
+            <li class="nav-item"> <a href="#"><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
+                                                    style="color: black; ">헬스스위치</span></a> </li>
+            <li class="nav-item"> <a href="#"><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
+                                                    style="color: black; ">씨드포인트</span></a> </li>
+            <li class="nav-item"> <a href="#"><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
+                                                    style="color: black; ">멤버십혜택</span></a> </li>
+            <li class="nav-login1">
+                <a sec:authorize="isAnonymous()" href="/members/new"> 회원가입 </a>
+                <a sec:authorize="hasRole('ROLE_MEMBER')" href="#"> 내정보 </a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"> 관리자페이지 </a>
+            </li>
+            <li class="nav-login2">
+                <a sec:authorize="isAnonymous()" th:href="@{/members/login}"> 로그인 </a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/members/logout}"> 로그아웃 </a>
+            </li>
+        </ul>
+    </nav>
+</div>

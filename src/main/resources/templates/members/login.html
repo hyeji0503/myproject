@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>로그인 페이지</title>
+</head>
+
+<body>
+<div id = "wrapper" style="max-width: 95rem; margin: auto;">
+
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <hr>
+
+    <div class="login-container" style="width: 320px; margin: 0 auto; position: relative">
+        <form action="/members/login" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <fieldset>
+                <div class="box-login">
+                    <div class="inp-text">
+                        <label for="username" class="screen-out">아이디</label>
+                        <input type="text" id="username" name="username" placeholder="ID">
+                    </div>
+                    <div class="inp-text">
+                        <label for="password" class="screen-out">비밀번호</label>
+                        <input type="password" id="password" name="password" placeholder="PASSWORD">
+                    </div>
+                </div>
+                <button type="submit" class="btn-login" >로그인</button>
+            </fieldset>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
+
+<style>
+    fieldset {
+        display: block;
+        margin-inline-start: 2px;
+        margin-inline-end: 2px;
+        padding-block-start: 0.35em;
+        padding-inline-start: 0.75em;
+        padding-inline-end: 0.75em;
+        padding-block-end: 0.625em;
+        min-inline-size: min-content;
+    }
+
+    .box-login {
+        margin: 35px 0 0;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+
+    .inp-text {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 18px 19px 19px;
+        box-sizing: border-box;
+    }
+
+    .inp-text input {
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: 13px;
+        color: #000;
+        border: none;
+        outline: 0;
+        -webkit-appearance: none;
+        background-color: transparent;
+    }
+
+    .inp-text+.inp-text {
+        border-top: 1px solid #ddd;
+    }
+
+    .btn-login {
+        margin: 20px 0 0;
+        width: 100%;
+        height: 48px;
+        border-radius: 3px;
+        font-size: 16px;
+        color: #0f0f0f;
+        background-color: #ffcf24;
+    }
+
+    .screen-out {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        line-height: 0;
+        text-indent: -9999px;
+    }
+
+    label {
+        cursor: default;
+    }
+
+
+</style>
