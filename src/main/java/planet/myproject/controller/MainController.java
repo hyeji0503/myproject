@@ -19,5 +19,8 @@ public class MainController {
         return "main";
     }
 
-
+    @GetMapping("/menu")
+    public String menu(Model model) {
+        return "/idea/menu";
+    }
 }

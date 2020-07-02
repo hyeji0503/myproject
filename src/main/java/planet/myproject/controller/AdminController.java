@@ -44,6 +44,7 @@ public class AdminController {
         contents.setContentsNum(form.getContentsNum());
         contents.setContentsName(form.getContentsName());
         contents.setContentsPrice(form.getContentsPrice());
+        contents.setContentsExplain(form.getContentsExplain());
 
         contentsService.saveContents(contents);
 

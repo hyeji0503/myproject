@@ -15,6 +15,7 @@ public class Contents {
     private int contentsNum;
     private String contentsName;
     private int contentsPrice;
+    private String contentsExplain;
 
     //'contents'와 'itemContents'의 oneToMany 연관관계 만들지 않음.
     // 조회할 일이 없을것 같기 때문.

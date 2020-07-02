@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Getter @Setter
 @Entity
@@ -34,13 +33,11 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<ItemContents> itemContentsList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item")
-    private List<Join> joinList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<Participate> participateList = new ArrayList<>();
 
 
-    /**
-     * 수정필요
-     */
     //연관관계 메서드
     public void addItemContents(ItemContents itemContents) {
         itemContentsList.add(itemContents);
@@ -48,13 +45,15 @@ public class Item {
     }
 
 
-    //item 가격 조회 수정필요,,
-    public int getItemTotalPrice(List<ItemContents> itemContentsList) {
-        int totalPrice = 0;
-        for (ItemContents itemContents : itemContentsList) {
-            totalPrice += itemContents.getItemContentsPrice();
-        }
-        return totalPrice;
+    //총 적립금
+    public int getItemTotalPrice() {
+        return getItemPrice() * getMemberCount();
+    }
+
+    //가입 멤버수 증가
+    public void addMember() {
+        int addCount = this.memberCount +1;
+        this.memberCount = addCount;
     }
 
 

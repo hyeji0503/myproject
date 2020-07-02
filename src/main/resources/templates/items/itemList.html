@@ -7,32 +7,26 @@
 </head>
 
 <body>
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
 
-<div id = "wrapper" style="max-width: 95rem; margin: auto;">
-
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+<div id = "wrapper" style="max-width: 30rem; margin: auto; z-index: 1;">
 
     <div id="content" class="item-main">
         <!--상단이미지-->
         <div class="item-visual-area">
-            <div class="item-visual-left">
-                <a href="/items/new" class="btn btn-primary" role="button" style="background-color: #ffc40d; border: 0">보험 제안하기</a>
-            </div>
-            <div class="item-visual-right"></div>
+            <img src="../image/배너.png" style="width: 100%">
         </div>
 
-        <div class="tap-sorting" style="height: 100px; width: 100%">
-            <ul>
-            </ul>
+        <div class="explain">
+            <img src="../image/설명.png" style="width: 100%">
         </div>
-
 
         <!--아이템-->
-        <div class="sorting-area" style="overflow: hidden; height: 970px;">
+        <div class="sorting-area" style="overflow: hidden; width: 100%">
             <div class="sorting-item" th:each="item : ${items}">
                 <div class="inners">
                     <div class="item-title" th:text="${item.itemName}"></div>
-                    <p class="txt" th:text="${item.itemExplanation}"}></p>
+                    <p class="explain2" th:text="${item.itemExplanation}"}></p>
                     <div class="area-detail">
                         <a href="#" th:href="@{/items/details/{id} (id=${item.id})}" class="btn-m3">상품 자세히 보기</a>
                     </div>
@@ -46,63 +40,36 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </div>
 </body>
+
+<div th:replace="fragments/footer :: footer" />
+
 </html>
 
 
 <style>
+
 
     h1{
         color: blue;
     }
 
 
-    .item-visual-area{
-        position: relative;
-        width: 100%;
-        height: 400px;
-        min-width: 980px;
-    }
-
-    .item-visual-left {
-        float: left;
-        position: relative;
-        width: 50%;
-        min-width: 490px;
-        height: 400px;
-        background-image: url('/image/introduce.png');
-        background-size: 720px 400px;
-        /*overflow: hidden;*/
-    }
-
-    .item-visual-right {
-        float: right;
-        position: relative;
-        width: 50%;
-        min-width: 490px;
-        height: 400px;
-        background: #02a5af;
-    }
-
     .sorting-area{
         position: relative;
-        width: 1100px;
         margin: 0px auto;
-
     }
 
     .sorting-item{
-        float: left;
-        width: 30%;
-        height: 187px;
+        width: 85%;
+        height: 150px;
         border: 1px solid #cfd6df;
         border-radius: 5px;
         background: #fff;
-        margin: 1rem;
+        margin: 20px auto;
 
     }
 
@@ -112,7 +79,7 @@
 
 
     .txt{
-        height: 56px;
+        height: 45px;
         font-size: 14px;
         color: #555;
         line-height: 21px;
@@ -126,24 +93,23 @@
         text-align: center;
         border: 1px solid #d4d8d9;
         border-radius: 4px;
+        margin-bottom: 8px;
     }
 
-    .area-detail{
-
-    }
-
-    .btn-primary{
-        color: black;
-        width: 215px;
-        height: 50px;
-        font-size: 24px;
-        text-align: center;
-        margin-left: 12.6rem;
-        margin-top: 17.1rem;
-    }
 
     .item-title{
         margin-bottom: 5px;
+    }
+
+    .explain2{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        line-height: 1.2em;
+        height: 2.4em;
     }
 
 </style>

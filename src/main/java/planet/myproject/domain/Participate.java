@@ -4,14 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Join {
+public class Participate{
 
     @Id @GeneratedValue
-    @Column(name = "join_id")
+    @Column(name = "participate_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,26 +23,28 @@ public class Join {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private LocalDateTime joinDate; //주문시간
-
 
     //==연관관계 메서드==//
     public void setMember(Member member) {
         this.member = member;
-        member.getJoinList().add(this);
+        member.getParticipateList().add(this);
     }
 
     public void setItem(Item item) {
         this.item = item;
-        item.getJoinList().add(this);
+        item.getParticipateList().add(this);
     }
 
     //==생성 메서드==//
-    public static Join createJoin(Member member, Item item) {
-        Join join = new Join();
-        join.setMember(member);
-        join.setItem(item);
-        join.setJoinDate(LocalDateTime.now());
-        return join;
+    public static Participate createParticipate(Member member, Item item) {
+        Participate participate = new Participate();
+        participate.setMember(member);
+        participate.setItem(item);
+
+        item.addMember();
+        member.addJoinMoney(item.getItemPrice());
+
+        return participate;
     }
+
 }

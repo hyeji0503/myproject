@@ -1,33 +1,108 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 
+<style>
+    .menu_bg { width: 100%; height: 2000px; position: fixed; top:0px; left:0px; overflow: hidden; display: none; }
+    .menu { position:absolute; top:0px; left:0px; width:75%; height: 100%; background-color:#24b7c7; }
+    .menu > div { padding: 2%; }
+</style>
 
-<div class="header" th:fragment="bodyHeader">
+<script>
+    var giMenuDuration = 700;
 
-    <span sec:authentication="name"></span> <-현재 사용자
-    <img src="/image/top.png" style="width: 100%">
-    <nav class="navbar">
-        <ul class="nav-container">
-            <li class="nav-brand"> <a href="/"><img src="/image/brand360.png" style="width: 290px; height: 85px; padding-left: 25px"></a></li>
-            <li class="nav-item"> <a href="#" ><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
-                                                     style="color: black; ">커뮤니티</span></a> </li>
-            <li class="nav-item"> <a href="/items/itemList" ><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
-                                                                  style="color: black; ">제목미정</span></a> </li>
-            <li class="nav-item"> <a href="#"><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
-                                                    style="color: black; ">헬스스위치</span></a> </li>
-            <li class="nav-item"> <a href="#"><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
-                                                    style="color: black; ">씨드포인트</span></a> </li>
-            <li class="nav-item"> <a href="#"><span onmouseover="this.style.color='#139EA8'" onmouseout="this.style.color='black'"
-                                                    style="color: black; ">멤버십혜택</span></a> </li>
-            <li class="nav-login1">
-                <a sec:authorize="isAnonymous()" href="/members/new"> 회원가입 </a>
-                <a sec:authorize="hasRole('ROLE_MEMBER')" href="#"> 내정보 </a>
-                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"> 관리자페이지 </a>
-            </li>
-            <li class="nav-login2">
-                <a sec:authorize="isAnonymous()" th:href="@{/members/login}"> 로그인 </a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/members/logout}"> 로그아웃 </a>
-            </li>
-        </ul>
-    </nav>
+    // 전체 메뉴를 오른쪽으로 슬라이드하여서 보여준다.
+    function ShowMenu(){
+        $('.menu_bg' ).css( { 'display' : 'block' } );
+        $('.menu' ).css( { 'left' : '-100%' } );
+        $('.menu' ).animate( { left: '0px' }, { duration: giMenuDuration } );
+    }
+
+    // 전체 메뉴를 왼쪽으로 슬라이드하여서 닫는다.
+    function HideMenu(){
+        $('.menu' ).animate( { left: '-100%' }, { duration: giMenuDuration, complete:function(){ $('.menu_bg' ).css( { 'display' : 'none' } ); } } );
+    }
+
+    // 확장 메뉴를 보여주거나 닫는다.
+    function ShowSubMenu( strId ){
+        var lySubMenu = $( strId );
+
+        if( lySubMenu.first().is( ":hidden" ) ){
+            $( strId ).slideDown( 300 );
+        }
+        else{
+            $( strId ).slideUp( 300 );
+        }
+    }
+
+    $( document ).ready( function()
+    {
+        $('.menu_2' ).hide();
+    } );
+</script>
+
+<div class="header" id="menu-header" th:fragment="bodyHeader" style=" max-width: 30rem; margin: auto; z-index: 2; position: relative; ">
+
+    <div style="width: 100%; margin-top: 5px; margin-bottom: 5px; display: inline-block">
+        <div style="width: 20%; float: left; padding-top: 3%; padding-left: 5%">
+            <img src="/image/open-menu.png" onclick="ShowMenu()" style="width: 45%">
+            <div class="menu_bg">
+                <div class="menu" style="background-color: #24b7c7; width: 75%; max-width: 25rem" >
+                    <div style="width: 100%; height: 45px; display: inline-block;">
+                        <div style="text-align: center; float:left; display: inline-block; width: 30%; margin-top: 12px; font-size: 17px; ">
+                            <a sec:authorize="isAnonymous()" href="/new"> 회원가입 </a>
+                            <a sec:authorize="hasRole('ROLE_MEMBER')" href="#"> 내정보 </a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"> 관리자페이지 </a>
+                        </div>
+                        <div style="text-align: center; float:left; display: inline-block; width: 30%; margin-top: 12px; font-size: 17px;">
+                            <a sec:authorize="isAnonymous()" th:href="@{/login}"> 로그인 </a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/logout}"> 로그아웃 </a>
+                        </div>
+                        <div style="display: inline-block; text-align: right; padding-right: 5%; width: 40%; margin-top: 12px; font-size: 17px;" onclick="HideMenu()">닫기</div>
+                    </div>
+                    <hr>
+                    <div style="width: 100%; display: inline-block; ">
+                        <div style="color: white; display: inline-block; width: 100%; padding-left: 6%; margin-bottom: 15px; ">
+                            <span sec:authentication="name"></span> 님
+                        </div>
+                        <div style="width: 32%; float: left; text-align: center">
+                            <a href="/members/myItem"><img src="/image/mypage.png" style="width: 60%"></a>
+                        </div>
+                        <div style="width: 32%; float: left; text-align: center">
+                            <a href="/items/itemList"><img src="/image/grouplist.png" style="width: 60%"></a>
+                        </div>
+                        <div style="width: 36%; float: left; text-align: center">
+                            <a href="/items/new"><img src="/image/makegroup.png" style="width: 60%"></a>
+                        </div>
+                    </div>
+
+                    <div style="width: 100%; display: inline-block;">
+                        <div style="width: 32%; float: left; text-align: center; color: white">
+                            내 그룹
+                        </div>
+                        <div style="width: 32%; float: left; text-align: center; color: white">
+                            그룹 목록
+                        </div>
+                        <div style="width: 36%; float: left; text-align: center; color: white">
+                            그룹 만들기
+                        </div>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+        <div style="width: 60%; float: left; text-align: center; padding-top: 1%;">
+            <a href="/">
+                <img src="/image/title.png" style="width: 70%">
+            </a>
+        </div>
+        <div style="width: 20%; float: left; text-align: right; padding-top: 3%; padding-right: 5%">
+            <a href="/members/myItem">
+                <img src="/image/user.png" style="width: 45%">
+            </a>
+        </div>
+    </div>
+
 </div>
+
+

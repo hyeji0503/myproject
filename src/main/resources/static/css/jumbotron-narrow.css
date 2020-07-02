@@ -40,9 +40,6 @@
     color: grey;
 }
 
-.header {
-    padding-bottom: 17px;
-}
 
 hr{
     color: #575757;
@@ -58,4 +55,44 @@ hr{
 
 .btn-primary:focus{
     outline: 0;
+}
+
+
+ a{
+     text-decoration: none;
+     color: black;
+ }
+
+#menu-header{
+    color: black;
+}
+
+#toggle{
+    display: none;
+}
+
+#nav{
+    display: none;
+}
+
+#nav li {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 4px;
+}
+
+#nav-label{
+    display: block;
+    background-size: 24px 19px;
+    text-align: left;
+    padding: 3px;
+    background: url("../image/메뉴바.png") no-repeat 97% 3px;
+    background-size: 25px 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#toggle:checked + #nav{
+    display: block;
 }

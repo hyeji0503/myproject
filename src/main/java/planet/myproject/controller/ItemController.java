@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import planet.myproject.domain.*;
 import planet.myproject.repository.ContentsRepository;
-import planet.myproject.repository.MemberRepository;
+import planet.myproject.repository.ParticipateRepository;
 import planet.myproject.service.*;
 
 import java.util.ArrayList;
@@ -26,14 +26,15 @@ public class ItemController {
     private final ItemService itemService;
     private final ContentsRepository contentsRepository;
     private final MemberService memberService;
-    private final MemberRepository memberRepository;
+    private final ParticipateService participateService;
+    private final ParticipateRepository participateRepository;
 
     @GetMapping("/items/itemList")
     public String itemList(Model model) {
         List<Item> items = itemService.findItems();
         model.addAttribute("items",items);
 
-        return "/items/itemListNew";
+        return "/items/itemList";
     }
 
     @GetMapping(value = "/members")
@@ -112,6 +113,17 @@ public class ItemController {
         model.addAttribute("contentsList", contentsList);
 
         return "/items/itemDetails";
+    }
+
+    @PostMapping(value = "/members/{itemId}/join")
+    public String participate(@PathVariable("itemId") Long itemId) {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
+
+        participateService.participate(username, itemId);
+
+        return "redirect:/";
     }
 
 

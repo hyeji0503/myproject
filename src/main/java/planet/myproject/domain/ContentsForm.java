@@ -10,6 +10,7 @@ public class ContentsForm {
     private int contentsNum;
     private String contentsName;
     private int contentsPrice;
+    private String contentsExplain;
 
 
 }

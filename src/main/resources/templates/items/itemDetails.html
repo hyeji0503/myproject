@@ -1,80 +1,117 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header">
     <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"></div>
 
-    <div id = "wrapper" style="max-width: 95rem; margin: auto;">
+<div id = "wrapper" style="max-width: 30rem; margin: auto; z-index: 1;">
 
-        <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div class="detail-header" style="display: inline-block">
 
-        <div class="detail-header">
+        <div class="item-detail-title" th:text="${item.itemName}"></div>
 
-            <div class="item-detail-title" th:text="${item.itemName}"></div>
-
-            <div class="item-info-container">
-                <div class="row row-cols-3">
-                    <div class="col-title">총 적립금</div>
-                    <div class="col-title">누적 지급금</div>
-                    <div class="col-title">가입 회원수</div>
-                </div>
-                <div class="row row-cols-3">
-                    <div class="col" id="counter1"></div>
-                    <div class="col">Column</div>
-                    <div class="col" id="counter3"></div>
-                </div>
+        <div class="item-info-container" style="display: inline-block; margin-left: 5%">
+            <div class="row">
+                <div class="col">회원수</div>
+                <div class="col" id="counter1">col</div>
+                <div class="w-100"></div>
+                <div class="col">보유 적립금</div>
+                <div class="col" id="counter3">col</div>
+                <div class="w-100"></div>
+                <div class="col" style="padding-bottom: 10px">누적 지급금</div>
+                <div class="col" id="counter2" style="padding-bottom: 10px">col</div>
             </div>
+        </div>
 
-            <!--
-
-            <form role="form" action="/order" method="post">
-                <input type="hidden" name="nowItem" th:value="${item.id}">
-                <input type="hidden" name="nowMember" th:value="${member.id}">
-                <button type="submit" class="btn btn-primary">가입하기</button>
+        <div class="lets-join" style="text-align:center; margin-top: 15px; " >
+            <form name="join-form" th:action="@{/members/{id}/join (id=${item.id})}" method="post">
+                <button type="submit" class="btn btn-info" style="float: right; width: 88%; font-size: 17px; font-weight: bold; margin-right: 6%">그룹참여하기</button>
             </form>
-
-            -->
-
         </div>
 
-        <div class="menu-wrapper">
-            <div class="row row-cols-3 menu">
-                <div class="menu-col"> 상품 소개 </div>
-                <div class="menu-col"> 뭘 넣을까 </div>
-                <div class="menu-col last"> 게시판 </div>
-            </div>
-        </div>
 
-        <div class="item-detail-wrapper" style="max-width: 60rem; margin: auto">
-            <div class="detail-name">보험료:</div>
-            <div class="item-detail-price" th:text="${item.itemPrice}"></div>
+        <!--
+ㄴ
+        <form role="form" action="/order" method="post">
+            <input type="hidden" name="nowItem" th:value="${item.id}">
+            <input type="hidden" name="nowMember" th:value="${member.id}">
+            <button type="submit" class="btn btn-primary">가입하기</button>
+        </form>
 
-            <div class="detail-name">보장 기간:</div>
-            <div class="item-detail-period" th:text="${item.period}"></div>
-
-            <div class="detail-name">상품 설명:</div>
-            <div class="item-detail-Explanation" th:text="${item.itemExplanation}"></div>
-
-            <div class="detail-name">보장 항목:</div>
-            <tbody>
-            <tr th:each="contents : ${contentsList}">
-                <td th:text="${contents.contentsName}"></td>
-            </tr>
-            </tbody>
-
-        </div>
-
-        </tr>
+        -->
 
     </div>
 
-</body>
+    <div class="menu-wrapper" style="display: inline-block">
+        <div class="menu-left"><a href="/items/details/">상품소개</a></div>
+        <div class="menu-right"><a href="#">회원전용</a></div>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <div class="item-detail-wrapper" style="max-width: 60rem; margin: auto">
+
+        <img src="/image/상품상세.jpeg" style="width: 100%; margin-top: 5px">
+        <div class="detail-explain" style="text-align: center;">여기는 상품 설명이 오는 란... </div>
+        <div class="item-detail-Explanation" th:text="${item.itemExplanation}" style="margin-bottom: 10px; text-align: center; padding-left: 5%; padding-right: 5%"></div>
+
+        <div class="blank" style="width: 100%; background-color: #e0e0e0; height: 15px"></div>
+
+        <div class="detail-etc">
+            <div class="table-title" style="font-size: 20px; font-weight: bold;">가입내용</div>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row">그룹명</th>
+                    <td th:text="${item.itemName}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">가입나이</th>
+                    <td>만 20-70세</td>
+                </tr>
+                <tr>
+                    <th scope="row">보장기간</th>
+                    <td th:text="${item.period}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">납입기간</th>
+                    <td>일시납</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="blank"></div>
+
+        <div class="table-title" style="font-size: 20px; font-weight: bold;">보장내용</div>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col" style="width: 25%">보장항목명</th>
+                <th scope="col">지급사유</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contents : ${contentsList}">
+                <td th:text="${contents.contentsName}"></td>
+                <td th:text="${contents.contentsExplain}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+
+    </tr>
+
+</div>
+
+</body>
+<div th:replace="fragments/footer :: footer" />
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
@@ -109,36 +146,26 @@
 
     /*]]>*/
 
-    new numberCounter("counter1", price);
+    new numberCounter("counter1", count);
     new numberCounter("counter2");
-    new numberCounter("counter3", count);
+    new numberCounter("counter3", price);
 </script>
 
 
 </html>
 
 <style>
-    .detail-name{
-        float: left;
-        margin-right: 10px;
-    }
 
     hr{
         margin-top: 0;
     }
 
     .item-info-container{
-        width: 60rem;
-        height: 100px;
+        width: 90%;
+        height: 110px;
         border: 1px solid #919191;
         border-radius: 10px;
-        margin: auto;
-        background-color: #f7f7f7;
-    }
-
-    .row-cols-3{
-        width: 100%;
-        height: 50%;
+        color: white;
     }
 
     .row{
@@ -151,47 +178,60 @@
     }
 
     .detail-header{
+        height: 220px;
         position: relative;
         width: 100%;
-        height: 350px;
-        min-width: 980px;
         background-image: url('/image/itemHeader.png');
-        background-size: 1440px 350px;
+        background-size: 100% auto;
     }
 
     .item-detail-title{
-        width: 60rem;
+        width: 90%;
         height: 50px;
         margin: auto;
-        padding-top: 15px;
+        padding-top: 8px;
         padding-left: 5px;
         font-size: 20px;
         color: #f7f7f7;
     }
 
-    .menu{
-        width: 60rem;
-        height: 100%;
-        margin: auto;
-        text-align: center;
-    }
-
-    .menu-col{
+    .menu-left{
+        float: left;
+        width: 50%;
         border-left: 1px solid #b3b3b3;
         height: 100%;
-        padding-top: 15px;
         font-size: 18px;
-        color: #363636;
+        text-align: center;
+        padding-top: 6px;
     }
 
-    .last{
-        border-right: 1px solid #b3b3b3;;
+    .menu-right{
+        float: left;
+        width: 50%;
+        border-left: 1px solid #b3b3b3;
+        height: 100%;
+        font-size: 18px;
+        text-align: center;
+        padding-top: 6px;
     }
 
     .menu-wrapper{
+        margin-top: 5px;
         width: 100%;
-        height: 60px;
+        height: 45px;
         border-top: 1px solid #b3b3b3;
         border-bottom: 1px solid #b3b3b3;
+    }
+
+    .table-title{
+        margin-top: 15px;
+        margin-bottom: 5px;
+        padding-left: 10px;
+    }
+
+    .blank{
+        width: 100%;
+        background-color: #e0e0e0;
+        height: 15px;
     }
 </style>

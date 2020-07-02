@@ -9,7 +9,7 @@ import planet.myproject.service.ContentsService;
 import planet.myproject.service.MemberService;
 
 @SpringBootApplication
-public class MyprojectApplication {
+public class  MyprojectApplication {
 
 	public static void main(String[] args) {
 

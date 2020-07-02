@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header" />
+
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+<div id = "wrapper" style="max-width: 30rem; margin: auto; z-index: 1;">
+
+    <div class="form-container" style="width: 90%; margin-left: 5%; display: inline-block">
+        <form th:action="@{/idea/new}" th:object="${form}" method="post">
+
+            <div class="form-group" style="display: inline-block; width: 100%">
+                <label th:for="title">제목</label>
+                <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력하세요">
+            </div>
+
+            <div class="form-group" style="display: inline-block; width: 100%">
+                <label th:for="text">내용</label>
+                <textarea th:field="*{text}" class="form-control" rows="3" placeholder="내용을 입력하세요"></textarea>
+            </div>
+
+            <div class="sub-button" style="display:inline-block; margin-bottom: 20px; width: 100%">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+<div th:replace="fragments/footer :: footer" />
+</html>

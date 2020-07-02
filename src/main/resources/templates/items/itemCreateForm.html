@@ -4,27 +4,15 @@
 <head th:replace="fragments/header :: header">
     <title>Hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet'>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </head>
-
-<!--
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-    function checkboxArr() {
-        let checkArr = [];     // 배열 초기화
-        $("input[name='itemContents']:checked").each(function(i) {
-            checkArr.push($(this));     // 체크된 것만 값을 뽑아서 배열에 push
-        }
-
-        $.ajax({
-            url: '/items/new' //클라이언트가 요청을 보낼 주소
-            , type: 'post' //요청 방식
-            , dataType: 'text' //서버에서 보내줄 데이터의 타입
-            , data: { //서버로 보낼 데이터
-                valueArrTest: checkArr
-            }
-        });
-    }
-</script>
--->
 
 
 </head>
@@ -32,20 +20,19 @@
 
 <body>
 
-<div id = "wrapper" style="max-width: 95rem; margin: auto;">
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
 
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+<div id = "wrapper" style="max-width: 30rem; margin: auto; z-index: 1;">
     <hr>
+    <div class="item-form-container" style="width: 85%; margin: auto; ">
 
-    <div class="item-form-container" style="max-width:50rem; margin: auto">
-
-        <div class="item-form-header"style="margin-bottom: 1rem"> <h1>상품 제안하기</h1> </div>
+        <div class="item-form-header"style="margin-bottom: 1rem"> <h1>그룹 만들기</h1> </div>
         <hr style="margin-bottom: 1rem">
 
         <form name="item-create-form" th:action="@{/items/new}" th:object="${form}" method="post">
 
             <div class="form-group">
-                <label for="exampleFormControlInput1">상품 이름</label>
+                <label for="exampleFormControlInput1">그룹 이름</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" name="itemName" placeholder="상품 이름을 입력해주세요.">
             </div>
 
@@ -78,7 +65,7 @@
             </div>
 
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">상품 소개</label>
+                <label for="exampleFormControlTextarea1">그룹 소개</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" name="itemExplanation" rows="3" ></textarea>
             </div>
 
@@ -88,7 +75,7 @@
                 <input type="checkbox" th:each="contents : ${contentsList}" th:text="${contents.contentsName}">
             </div>
             -->
-            <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
+            <button type="submit" class="btn btn-info" style="float: right">승인요청</button>
         </form>
 
         <!--
@@ -99,13 +86,15 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </div>
 
 </body>
+
+<div th:replace="fragments/footer :: footer" />
+
 </html>
 
 
@@ -113,7 +102,7 @@
 
     h1{
         color: #383838;
-        font-size: 30px;
+        font-size: 20px;
 
     }
 

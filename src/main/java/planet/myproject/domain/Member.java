@@ -26,8 +26,12 @@ public class Member {
 
     private int userMoney = 100000;
 
+    private int totalJoinMoney;
+
+    private int totalReceiveMoney;
+
     @OneToMany(mappedBy = "member")
-    private List<Join> joinList = new ArrayList<>();
+    private List<Participate> participateList = new ArrayList<>();
 
     @Builder
     public Member(Long id, String userId, String password, String name){
@@ -36,6 +40,11 @@ public class Member {
         this.password= password;
         this.name = name;
         this.userMoney= 100000;
+    }
+
+    public void addJoinMoney(int money) {
+        int joinMoney = this.totalJoinMoney + money;
+        this.totalJoinMoney = joinMoney;
     }
 
 
